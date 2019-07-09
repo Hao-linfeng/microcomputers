@@ -1,0 +1,197 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Project:</h2>
+C:\Users\user\Desktop\DA采集电位器值在12864显示\DA.uvproj
+Project File Date:  <unknown>
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling DA.C...
+linking...
+Program Size: data=13.2 xdata=0 code=793
+creating hex file from "DA"...
+"DA" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling DA.C...
+linking...
+Program Size: data=13.2 xdata=0 code=793
+creating hex file from "DA"...
+"DA" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling DA.C...
+linking...
+Program Size: data=13.2 xdata=0 code=793
+creating hex file from "DA"...
+"DA" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling DA.C...
+linking...
+Program Size: data=13.2 xdata=0 code=819
+creating hex file from "DA"...
+"DA" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling DA.C...
+linking...
+Program Size: data=15.2 xdata=0 code=1007
+creating hex file from "DA"...
+"DA" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling DA.C...
+linking...
+Program Size: data=15.2 xdata=0 code=1000
+creating hex file from "DA"...
+"DA" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling DA.C...
+linking...
+Program Size: data=15.2 xdata=0 code=953
+creating hex file from "DA"...
+"DA" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling DA.C...
+linking...
+Program Size: data=15.2 xdata=0 code=958
+creating hex file from "DA"...
+"DA" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling DA.C...
+linking...
+Program Size: data=15.2 xdata=0 code=987
+creating hex file from "DA"...
+"DA" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling DA.C...
+linking...
+Program Size: data=15.2 xdata=0 code=981
+creating hex file from "DA"...
+"DA" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling DA.C...
+linking...
+Program Size: data=15.2 xdata=0 code=981
+creating hex file from "DA"...
+"DA" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling DA.C...
+linking...
+Program Size: data=15.2 xdata=0 code=1003
+creating hex file from "DA"...
+"DA" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling DA.C...
+linking...
+Program Size: data=15.2 xdata=0 code=980
+creating hex file from "DA"...
+"DA" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling DA.C...
+linking...
+Program Size: data=15.2 xdata=0 code=984
+creating hex file from "DA"...
+"DA" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling DA.C...
+DA.C(322): error C202: 'P1M0': undefined identifier
+DA.C(323): error C202: 'P1M1': undefined identifier
+DA.C(324): error C141: syntax error near 'unsigned'
+DA.C(324): error C202: 'num': undefined identifier
+DA.C(325): error C141: syntax error near 'unsigned'
+DA.C(325): error C202: 'i': undefined identifier
+DA.C(332): error C202: 'i': undefined identifier
+DA.C(333): error C202: 'i': undefined identifier
+DA.C(335): error C202: 'i': undefined identifier
+DA.C(336): error C202: 'i': undefined identifier
+DA.C(339): error C202: 'i': undefined identifier
+DA.C(340): error C202: 'i': undefined identifier
+DA.C(342): error C202: 'i': undefined identifier
+DA.C(343): error C202: 'i': undefined identifier
+DA.C(347): error C202: 'i': undefined identifier
+DA.C(348): error C202: 'i': undefined identifier
+DA.C(350): error C202: 'i': undefined identifier
+DA.C(351): error C202: 'i': undefined identifier
+DA.C(357): error C202: 'n': undefined identifier
+DA.C(359): error C202: 'num': undefined identifier
+DA.C(364): error C202: 'num': undefined identifier
+DA.C(368): error C202: 'num': undefined identifier
+DA.C(369): error C202: 'num': undefined identifier
+DA.C(370): error C202: 'num': undefined identifier
+DA.C(371): error C202: 'num': undefined identifier
+Target not created
+Build target 'Target 1'
+compiling DA.C...
+DA.C(324): error C141: syntax error near 'unsigned'
+DA.C(324): error C202: 'num': undefined identifier
+DA.C(325): error C141: syntax error near 'unsigned'
+DA.C(325): error C202: 'i': undefined identifier
+DA.C(332): error C202: 'i': undefined identifier
+DA.C(333): error C202: 'i': undefined identifier
+DA.C(335): error C202: 'i': undefined identifier
+DA.C(336): error C202: 'i': undefined identifier
+DA.C(339): error C202: 'i': undefined identifier
+DA.C(340): error C202: 'i': undefined identifier
+DA.C(342): error C202: 'i': undefined identifier
+DA.C(343): error C202: 'i': undefined identifier
+DA.C(347): error C202: 'i': undefined identifier
+DA.C(348): error C202: 'i': undefined identifier
+DA.C(350): error C202: 'i': undefined identifier
+DA.C(351): error C202: 'i': undefined identifier
+DA.C(357): error C202: 'n': undefined identifier
+DA.C(359): error C202: 'num': undefined identifier
+DA.C(364): error C202: 'num': undefined identifier
+DA.C(368): error C202: 'num': undefined identifier
+DA.C(369): error C202: 'num': undefined identifier
+DA.C(370): error C202: 'num': undefined identifier
+DA.C(371): error C202: 'num': undefined identifier
+Target not created
+Build target 'Target 1'
+compiling DA.C...
+DA.C(324): error C141: syntax error near 'unsigned'
+DA.C(324): error C202: 'num': undefined identifier
+DA.C(325): error C141: syntax error near 'unsigned'
+DA.C(325): error C202: 'i': undefined identifier
+DA.C(332): error C202: 'i': undefined identifier
+DA.C(333): error C202: 'i': undefined identifier
+DA.C(335): error C202: 'i': undefined identifier
+DA.C(336): error C202: 'i': undefined identifier
+DA.C(339): error C202: 'i': undefined identifier
+DA.C(340): error C202: 'i': undefined identifier
+DA.C(342): error C202: 'i': undefined identifier
+DA.C(343): error C202: 'i': undefined identifier
+DA.C(347): error C202: 'i': undefined identifier
+DA.C(348): error C202: 'i': undefined identifier
+DA.C(350): error C202: 'i': undefined identifier
+DA.C(351): error C202: 'i': undefined identifier
+DA.C(357): error C202: 'n': undefined identifier
+DA.C(359): error C202: 'num': undefined identifier
+DA.C(364): error C202: 'num': undefined identifier
+DA.C(368): error C202: 'num': undefined identifier
+DA.C(369): error C202: 'num': undefined identifier
+DA.C(370): error C202: 'num': undefined identifier
+DA.C(371): error C202: 'num': undefined identifier
+Target not created
+Build target 'Target 1'
+compiling DA.C...
+linking...
+Program Size: data=15.2 xdata=0 code=989
+creating hex file from "DA"...
+"DA" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling DA.C...
+linking...
+Program Size: data=15.2 xdata=0 code=989
+creating hex file from "DA"...
+"DA" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling DA.C...
+linking...
+Program Size: data=15.2 xdata=0 code=989
+creating hex file from "DA"...
+"DA" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling DA.C...
+linking...
+Program Size: data=15.2 xdata=0 code=989
+creating hex file from "DA"...
+"DA" - 0 Error(s), 0 Warning(s).

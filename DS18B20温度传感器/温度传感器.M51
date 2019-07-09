@@ -1,0 +1,471 @@
+BL51 BANKED LINKER/LOCATER V6.05                                                        05/04/2019  19:07:11  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.05, INVOKED BY:
+D:\KEIL C51\KEIL UV3 8.08 + 注册机\KEIL UV3 8.08\C51\BIN\BL51.EXE STARTUP.obj, 温度传感器.obj TO 温度传感器 RAMSIZE (256
+>> )
+
+
+MEMORY MODEL: SMALL WITH FLOATING POINT ARITHMETIC
+
+
+INPUT MODULES INCLUDED:
+  STARTUP.obj (?C_STARTUP)
+  温度传感器.obj (蝊度传感器)
+  D:\KEIL C51\KEIL UV3 8.08 + 注册机\KEIL UV3 8.08\C51\LIB\C51FPS.LIB (?C?FPADD)
+  D:\KEIL C51\KEIL UV3 8.08 + 注册机\KEIL UV3 8.08\C51\LIB\C51FPS.LIB (?C?FPMUL)
+  D:\KEIL C51\KEIL UV3 8.08 + 注册机\KEIL UV3 8.08\C51\LIB\C51FPS.LIB (?C?FPDIV)
+  D:\KEIL C51\KEIL UV3 8.08 + 注册机\KEIL UV3 8.08\C51\LIB\C51FPS.LIB (?C?FCAST)
+  D:\KEIL C51\KEIL UV3 8.08 + 注册机\KEIL UV3 8.08\C51\LIB\C51FPS.LIB (?C?CASTF)
+  D:\KEIL C51\KEIL UV3 8.08 + 注册机\KEIL UV3 8.08\C51\LIB\C51FPS.LIB (?C?FPGETOPN)
+  D:\KEIL C51\KEIL UV3 8.08 + 注册机\KEIL UV3 8.08\C51\LIB\C51S.LIB (?C_INIT)
+  D:\KEIL C51\KEIL UV3 8.08 + 注册机\KEIL UV3 8.08\C51\LIB\C51S.LIB (?C?UIDIV)
+  D:\KEIL C51\KEIL UV3 8.08 + 注册机\KEIL UV3 8.08\C51\LIB\C51S.LIB (?C?LNEG)
+
+
+LINK MAP OF MODULE:  温度传感器 (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     000AH     UNIT         _DATA_GROUP_
+                    0012H     000EH                  *** GAP ***
+            BIT     0020H.0   0000H.1   UNIT         _BIT_GROUP_
+                    0020H.1   0000H.7                *** GAP ***
+            DATA    0021H     0026H     UNIT         ?DT?蝊度传感器
+            IDATA   0047H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     03C0H     UNIT         ?C?LIB_CODE
+            CODE    0BC0H     00A7H     UNIT         ?PR?MAIN?蝊度传感器
+            CODE    0C67H     008CH     UNIT         ?C_C51STARTUP
+            CODE    0CF3H     006AH     UNIT         ?PR?READTEMPERATURE?蝊度传感器
+            CODE    0D5DH     0032H     UNIT         ?PR?LNIT_12864?蝊度传感器
+            CODE    0D8FH     0028H     UNIT         ?PR?INIT_DS18B20?蝊度传感器
+            CODE    0DB7H     0027H     UNIT         ?C_INITSEG
+            CODE    0DDEH     0023H     UNIT         ?PR?_DELAY?蝊度传感器
+            CODE    0E01H     0021H     UNIT         ?PR?_WDAT?蝊度传感器
+            CODE    0E22H     0020H     UNIT         ?PR?_POS?蝊度传感器
+            CODE    0E42H     0020H     UNIT         ?PR?READONECHAR?蝊度传感器
+            CODE    0E62H     001AH     UNIT         ?PR?_WCMD?蝊度传感器
+            CODE    0E7CH     001AH     UNIT         ?PR?_WRITEONECHAR?蝊度传感器
+            CODE    0E96H     0019H     UNIT         ?PR?BUSY?蝊度传感器
+            CODE    0EAFH     000BH     UNIT         ?PR?_DELAY1?蝊度传感器
+
+
+
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/04/2019  19:07:11  PAGE 2
+
+
+OVERLAY MAP OF MODULE:   温度传感器 (?C_STARTUP)
+
+
+SEGMENT                                   BIT_GROUP          DATA_GROUP 
+  +--> CALLED SEGMENT                  START    LENGTH     START    LENGTH
+--------------------------------------------------------------------------
+?C_C51STARTUP                          -----    -----      -----    -----
+  +--> ?PR?MAIN?蝊度传感器
+  +--> ?C_INITSEG
+
+?PR?MAIN?蝊度传感器                    -----    -----      0008H    0006H
+  +--> ?PR?LNIT_12864?蝊度传感器
+  +--> ?PR?INIT_DS18B20?蝊度传感器
+  +--> ?PR?_POS?蝊度传感器
+  +--> ?PR?_WDAT?蝊度传感器
+  +--> ?PR?READTEMPERATURE?蝊度传感器
+  +--> ?PR?_DELAY?蝊度传感器
+
+?PR?LNIT_12864?蝊度传感器              -----    -----      -----    -----
+  +--> ?PR?_WCMD?蝊度传感器
+  +--> ?PR?_DELAY?蝊度传感器
+
+?PR?_WCMD?蝊度传感器                   -----    -----      -----    -----
+  +--> ?PR?BUSY?蝊度传感器
+  +--> ?PR?_DELAY?蝊度传感器
+
+?PR?BUSY?蝊度传感器                    0020H.0  0000H.1    -----    -----
+  +--> ?PR?_DELAY?蝊度传感器
+
+?PR?_DELAY?蝊度传感器                  -----    -----      000EH    0001H
+
+?PR?INIT_DS18B20?蝊度传感器            -----    -----      -----    -----
+  +--> ?PR?_DELAY1?蝊度传感器
+
+?PR?_POS?蝊度传感器                    -----    -----      -----    -----
+  +--> ?PR?_WCMD?蝊度传感器
+
+?PR?_WDAT?蝊度传感器                   -----    -----      -----    -----
+  +--> ?PR?BUSY?蝊度传感器
+  +--> ?PR?_DELAY?蝊度传感器
+
+?PR?READTEMPERATURE?蝊度传感器         -----    -----      000EH    0004H
+  +--> ?PR?INIT_DS18B20?蝊度传感器
+  +--> ?PR?_WRITEONECHAR?蝊度传感器
+  +--> ?PR?READONECHAR?蝊度传感器
+
+?PR?_WRITEONECHAR?蝊度传感器           -----    -----      -----    -----
+  +--> ?PR?_DELAY1?蝊度传感器
+
+?PR?READONECHAR?蝊度传感器             -----    -----      -----    -----
+  +--> ?PR?_DELAY1?蝊度传感器
+
+
+
+SYMBOL TABLE OF MODULE:  温度传感器 (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/04/2019  19:07:11  PAGE 3
+
+
+  ----------------------------------
+
+  -------         MODULE        ?C_STARTUP
+  C:0C67H         SEGMENT       ?C_C51STARTUP
+  I:0047H         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:0C6AH         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:0C67H         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:0C67H         LINE#         133
+  C:0C69H         LINE#         134
+  C:0C6AH         LINE#         135
+  C:0C6BH         LINE#         136
+  C:0C6DH         LINE#         185
+  C:0C70H         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        蝊度传感器
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  C:0DE4H         PUBLIC        _delay
+  D:0021H         PUBLIC        head
+  C:0CF3H         PUBLIC        ReadTemperature
+  B:00A0H.4       PUBLIC        DQ
+  C:0D8FH         PUBLIC        Init_DS18B20
+  C:0D5DH         PUBLIC        lnit_12864
+  C:0E42H         PUBLIC        ReadOneChar
+  B:00B0H.5       PUBLIC        RS
+  C:0BC0H         PUBLIC        main
+  B:00B0H.6       PUBLIC        RW
+  C:0E62H         PUBLIC        _wcmd
+  C:0E0AH         PUBLIC        _wdat
+  C:0E7CH         PUBLIC        _WriteOneChar
+  D:0026H         PUBLIC        temp
+  D:0027H         PUBLIC        mun_char_table
+  C:0EAFH         PUBLIC        _delay1
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/04/2019  19:07:11  PAGE 4
+
+
+  B:00B0H.4       PUBLIC        E
+  C:0E96H         PUBLIC        busy
+  D:0038H         PUBLIC        num
+  C:0E22H         PUBLIC        _pos
+  B:00B0H.7       PUBLIC        PSB
+  D:0039H         PUBLIC        k1num
+  D:003AH         PUBLIC        k2num
+  D:003BH         PUBLIC        k3num
+  D:003CH         PUBLIC        k4num
+  D:003DH         PUBLIC        dis1
+  C:0DE0H         SYMBOL        L?0046
+  -------         PROC          L?0045
+  -------         ENDPROC       L?0045
+  C:0DE0H         SYMBOL        L?0046
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        ms
+  -------         DO            
+  D:000EH         SYMBOL        i
+  -------         ENDDO         
+  C:0DE4H         LINE#         27
+  C:0DE4H         LINE#         28
+  C:0DE4H         LINE#         29
+  C:0DEEH         LINE#         30
+  C:0DEEH         LINE#         32
+  C:0DF8H         LINE#         33
+  C:0DF8H         LINE#         34
+  C:0DF9H         LINE#         35
+  C:0DFAH         LINE#         36
+  C:0DFBH         LINE#         37
+  C:0DFCH         LINE#         38
+  C:0E00H         LINE#         39
+  C:0E00H         LINE#         40
+  -------         ENDPROC       _DELAY
+  -------         PROC          BUSY
+  -------         DO            
+  B:0020H.0       SYMBOL        result
+  -------         ENDDO         
+  C:0E96H         LINE#         44
+  C:0E96H         LINE#         45
+  C:0E96H         LINE#         47
+  C:0E99H         LINE#         48
+  C:0E9BH         LINE#         49
+  C:0E9DH         LINE#         50
+  C:0E9FH         LINE#         51
+  C:0EA5H         LINE#         52
+  C:0EAAH         LINE#         53
+  C:0EACH         LINE#         54
+  C:0EAEH         LINE#         55
+  -------         ENDPROC       BUSY
+  -------         PROC          _WCMD
+  D:0005H         SYMBOL        cmd
+  C:0E62H         LINE#         59
+  C:0E64H         LINE#         60
+  C:0E64H         LINE#         61
+  C:0E69H         LINE#         62
+  C:0E6BH         LINE#         63
+  C:0E6DH         LINE#         64
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/04/2019  19:07:11  PAGE 5
+
+
+  C:0E6FH         LINE#         65
+  C:0E70H         LINE#         66
+  C:0E71H         LINE#         67
+  C:0E71H         LINE#         68
+  C:0E74H         LINE#         69
+  C:0E76H         LINE#         70
+  C:0E79H         LINE#         71
+  C:0E7BH         LINE#         72
+  -------         ENDPROC       _WCMD
+  -------         PROC          L?0047
+  -------         ENDPROC       L?0047
+  -------         PROC          _WDAT
+  D:0005H         SYMBOL        dat
+  C:0E0AH         LINE#         76
+  C:0E0CH         LINE#         77
+  C:0E0CH         LINE#         78
+  C:0E11H         LINE#         79
+  C:0E13H         LINE#         80
+  C:0E15H         LINE#         81
+  C:0E17H         LINE#         82
+  C:0E17H         LINE#         83
+  C:0E1AH         LINE#         84
+  C:0E1CH         LINE#         85
+  C:0E1FH         LINE#         86
+  C:0E21H         LINE#         87
+  -------         ENDPROC       _WDAT
+  -------         PROC          LNIT_12864
+  C:0D5DH         LINE#         90
+  C:0D5DH         LINE#         91
+  C:0D5DH         LINE#         92
+  C:0D5FH         LINE#         94
+  C:0D64H         LINE#         95
+  C:0D6BH         LINE#         96
+  C:0D70H         LINE#         97
+  C:0D77H         LINE#         98
+  C:0D7CH         LINE#         99
+  C:0D83H         LINE#         100
+  C:0D88H         LINE#         101
+  -------         ENDPROC       LNIT_12864
+  -------         PROC          _POS
+  D:0007H         SYMBOL        X
+  D:0005H         SYMBOL        Y
+  -------         DO            
+  D:0007H         SYMBOL        pos
+  -------         ENDDO         
+  C:0E22H         LINE#         105
+  C:0E22H         LINE#         106
+  C:0E22H         LINE#         108
+  C:0E25H         LINE#         109
+  C:0E29H         LINE#         110
+  C:0E2CH         LINE#         111
+  C:0E30H         LINE#         112
+  C:0E33H         LINE#         113
+  C:0E37H         LINE#         114
+  C:0E3AH         LINE#         115
+  C:0E3CH         LINE#         116
+  C:0E3FH         LINE#         117
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/04/2019  19:07:11  PAGE 6
+
+
+  -------         ENDPROC       _POS
+  -------         PROC          _DELAY1
+  D:0006H         SYMBOL        i
+  C:0EAFH         LINE#         123
+  C:0EAFH         LINE#         124
+  C:0EAFH         LINE#         125
+  C:0EB9H         LINE#         126
+  -------         ENDPROC       _DELAY1
+  -------         PROC          INIT_DS18B20
+  -------         DO            
+  D:0005H         SYMBOL        x
+  -------         ENDDO         
+  C:0D8FH         LINE#         129
+  C:0D8FH         LINE#         130
+  C:0D8FH         LINE#         131
+  C:0D91H         LINE#         132
+  C:0D93H         LINE#         133
+  C:0D99H         LINE#         134
+  C:0D9BH         LINE#         135
+  C:0DA2H         LINE#         136
+  C:0DA4H         LINE#         137
+  C:0DABH         LINE#         138
+  C:0DB0H         LINE#         139
+  -------         ENDPROC       INIT_DS18B20
+  -------         PROC          READONECHAR
+  -------         DO            
+  D:0005H         SYMBOL        i
+  D:0003H         SYMBOL        dat
+  -------         ENDDO         
+  C:0E42H         LINE#         143
+  C:0E42H         LINE#         144
+  C:0E42H         LINE#         145
+  C:0E43H         LINE#         146
+  C:0E44H         LINE#         147
+  C:0E46H         LINE#         148
+  C:0E48H         LINE#         149
+  C:0E4CH         LINE#         150
+  C:0E4EH         LINE#         151
+  C:0E54H         LINE#         152
+  C:0E5BH         LINE#         153
+  C:0E5DH         LINE#         154
+  C:0E61H         LINE#         155
+  -------         ENDPROC       READONECHAR
+  -------         PROC          _WRITEONECHAR
+  D:0005H         SYMBOL        dat
+  -------         DO            
+  D:0003H         SYMBOL        i
+  -------         ENDDO         
+  C:0E7CH         LINE#         158
+  C:0E7EH         LINE#         159
+  C:0E7EH         LINE#         160
+  C:0E7EH         LINE#         161
+  C:0E80H         LINE#         162
+  C:0E82H         LINE#         163
+  C:0E86H         LINE#         164
+  C:0E8DH         LINE#         165
+  C:0E8FH         LINE#         166
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/04/2019  19:07:11  PAGE 7
+
+
+  C:0E93H         LINE#         167
+  C:0E95H         LINE#         168
+  -------         ENDPROC       _WRITEONECHAR
+  -------         PROC          READTEMPERATURE
+  -------         DO            
+  D:0002H         SYMBOL        a
+  D:0007H         SYMBOL        b
+  D:0004H         SYMBOL        t
+  D:000EH         SYMBOL        tt
+  -------         ENDDO         
+  C:0CF3H         LINE#         171
+  C:0CF3H         LINE#         172
+  C:0CF3H         LINE#         173
+  C:0CF5H         LINE#         174
+  C:0CF6H         LINE#         175
+  C:0CF8H         LINE#         177
+  C:0D00H         LINE#         178
+  C:0D03H         LINE#         179
+  C:0D08H         LINE#         180
+  C:0D0DH         LINE#         181
+  C:0D10H         LINE#         182
+  C:0D15H         LINE#         183
+  C:0D1AH         LINE#         184
+  C:0D1FH         LINE#         185
+  C:0D22H         LINE#         186
+  C:0D24H         LINE#         187
+  C:0D26H         LINE#         188
+  C:0D28H         LINE#         189
+  C:0D3EH         LINE#         190
+  C:0D5CH         LINE#         191
+  C:0D5CH         LINE#         192
+  -------         ENDPROC       READTEMPERATURE
+  -------         PROC          MAIN
+  -------         DO            
+  D:0008H         SYMBOL        t
+  D:0002H         SYMBOL        i
+  D:000AH         SYMBOL        num
+  -------         ENDDO         
+  C:0BC0H         LINE#         196
+  C:0BC0H         LINE#         197
+  C:0BC0H         LINE#         199
+  C:0BC3H         LINE#         201
+  C:0BC6H         LINE#         202
+  C:0BC9H         LINE#         204
+  C:0BCFH         LINE#         205
+  C:0BD7H         LINE#         206
+  C:0BD7H         LINE#         207
+  C:0BDAH         LINE#         208
+  C:0BDFH         LINE#         209
+  C:0BE1H         LINE#         211
+  C:0BE1H         LINE#         212
+  C:0BE1H         LINE#         213
+  C:0BE8H         LINE#         214
+  C:0BEFH         LINE#         215
+  C:0BF6H         LINE#         216
+  C:0BFDH         LINE#         217
+  C:0C08H         LINE#         218
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/04/2019  19:07:11  PAGE 8
+
+
+  C:0C20H         LINE#         219
+  C:0C25H         LINE#         220
+  C:0C39H         LINE#         221
+  C:0C3EH         LINE#         222
+  C:0C43H         LINE#         223
+  C:0C5DH         LINE#         224
+  C:0C64H         LINE#         225
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        蝊度传感器
+
+  -------         MODULE        ?C?FPADD
+  C:0807H         PUBLIC        ?C?FPADD
+  C:0803H         PUBLIC        ?C?FPSUB
+  -------         ENDMOD        ?C?FPADD
+
+  -------         MODULE        ?C?FPMUL
+  C:08F8H         PUBLIC        ?C?FPMUL
+  -------         ENDMOD        ?C?FPMUL
+
+  -------         MODULE        ?C?FPDIV
+  C:0A01H         PUBLIC        ?C?FPDIV
+  -------         ENDMOD        ?C?FPDIV
+
+  -------         MODULE        ?C?FCAST
+  C:0AA8H         PUBLIC        ?C?FCASTC
+  C:0AA3H         PUBLIC        ?C?FCASTI
+  C:0A9EH         PUBLIC        ?C?FCASTL
+  -------         ENDMOD        ?C?FCAST
+
+  -------         MODULE        ?C?CASTF
+  C:0ADCH         PUBLIC        ?C?CASTF
+  -------         ENDMOD        ?C?CASTF
+
+  -------         MODULE        ?C?UIDIV
+  C:0B5DH         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+  -------         MODULE        ?C?LNEG
+  C:0BB2H         PUBLIC        ?C?LNEG
+  -------         ENDMOD        ?C?LNEG
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 027CH BYTE (31%) *
+******************************************************************************
+
+Program Size: data=57.1 xdata=0 code=1725
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

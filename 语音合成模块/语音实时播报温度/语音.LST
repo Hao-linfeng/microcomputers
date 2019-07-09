@@ -1,0 +1,352 @@
+C51 COMPILER V8.08   语音                                                                  05/05/2019 23:12:24 PAGE 1   
+
+
+C51 COMPILER V8.08, COMPILATION OF MODULE 语音
+OBJECT MODULE PLACED IN 语音.OBJ
+COMPILER INVOKED BY: D:\keil C51\KEIL UV3 8.08 + 注册机\KEIL UV3 8.08\C51\BIN\C51.EXE 语音.c LARGE BROWSE DEBUG OBJECTEX
+                    -TEND
+
+line level    source
+
+   1          #include <reg51.h>
+   2          #include <stdio.h>
+   3          #include <intrins.h>
+   4          #include <string.h>
+   5          #define uchar unsigned char
+   6          #define uint  unsigned int
+   7          /*独立键盘端口定义*/
+   8          sbit  S1=P1^1;
+   9          /*DS18B20温度传感器定义*/
+  10          #define HEADLEN       5  //数据包头的长度
+  11          #define LEN_OFFSET    2 
+  12          sbit DQ=P2^4;                   
+  13          uchar head[HEADLEN] = {0xfd,0x00,0x00,0x01,0x00};
+  14          /*语音合成模块定义*/
+  15          #define BUFLEN      32  //文字缓冲区的长度
+  16          sbit  BY=P1^0;                  //BY用于键扫描
+  17          //sbit TXD=P3^0;                        //TXD用于发送
+  18          //sbit RXD=P3^1;                        //RXD用于接收
+  19          /*12864液晶屏 端口定义*/
+  20          #define data  P0           //数据口
+  21          sbit   RS=P3^5;            //寄存器选择输入 
+  22          sbit   RW=P3^6;            //液晶读/写控制
+  23          sbit    E=P3^4;            //液晶使能控制
+  24          sbit  PSB=P3^7;            //串/并方式控制
+  25          sbit wela=P2^6;
+  26          sbit dula=P2^7;
+  27          /*定义数字ascii编码*/
+  28          unsigned char mun_char_table[]={"0123456789abcdef"};
+  29          
+  30          uchar num,temp,k1num,k2num,k3num,k4num;
+  31          
+  32          //文字（中间有需要变化的内容可在发送前修改）
+  33          uchar text[BUFLEN] = {"当前温度"};
+  34          uchar  dison[]={"q007"};
+  35          uchar  clear[]={"                "};
+  36          uchar  dis1[]={"当前温度:"};
+  37          
+  38          void delay0(uchar x);  //x*0.14MS
+  39          void beep();
+  40          void dataconv();
+  41          void pos(uchar X,uchar Y);  //确定显示位置
+  42          
+  43          //////////////////以下是12864驱动程序////////////////                                                     
+             -         
+  44          //函数功能：延时函数
+  45          void delay(int ms)
+  46          {
+  47   1          while(ms--)
+  48   1              {
+  49   2            uchar i;
+  50   2                for(i=0;i<250;i++)  
+  51   2                 {
+  52   3                  _nop_();                       
+  53   3                      _nop_();
+C51 COMPILER V8.08   语音                                                                  05/05/2019 23:12:24 PAGE 2   
+
+  54   3                      _nop_();
+  55   3                      _nop_();
+  56   3                 }
+  57   2              }
+  58   1      }
+  59          
+  60          //函数功能：检查LCD忙状态
+  61          //lcd_busy为1时，忙，等待。lcd-busy为0时,闲，可写指令与数据。
+  62          bit busy()
+  63           { 
+  64   1          bit result;
+  65   1          P0=0x00;              //关掉数码管的信号。阻止数码管受到P0口信号的影响
+  66   1          RS=0;
+  67   1          RW=1;
+  68   1           E=1;
+  69   1          delay(1);
+  70   1          result = (bit)(P0&0x80);
+  71   1           E=0;
+  72   1          return(result); 
+  73   1       }
+  74          
+  75          //函数功能：写指令数据到LCD                                                  
+  76          //RS=L，RW=L，E=高脉冲，D0-D7=指令码。
+  77          void wcmd(uchar cmd)
+  78          {                       
+  79   1         while(busy());
+  80   1          RS=0;
+  81   1          RW=0;
+  82   1           E=0;
+  83   1          _nop_();
+  84   1          _nop_(); 
+  85   1          P0=cmd;
+  86   1          delay(1);
+  87   1           E=1;
+  88   1          delay(1);
+  89   1           E=0;  
+  90   1      }
+  91                                                                         
+  92          //函数功能：写显示数据到LCD                                                  
+  93          //RS=H，RW=L，E=高脉冲，D0-D7=数据。                               
+  94          void wdat(uchar dat)
+  95          {                          
+  96   1         while(busy());
+  97   1          RS=1;
+  98   1          RW=0;
+  99   1           E=0;
+ 100   1          P0=dat;
+ 101   1          delay(1);
+ 102   1           E=1;
+ 103   1          delay(1);
+ 104   1           E=0; 
+ 105   1      }
+ 106                                                                       
+ 107          //函数功能：LCD初始化设定                                                 
+ 108          void Init_12864()
+ 109          { 
+ 110   1          PSB=1;         //并口方式
+ 111   1          
+ 112   1          wcmd(0x34);      //扩充指令操作
+ 113   1          delay(5);
+ 114   1          wcmd(0x30);      //基本指令操作
+ 115   1          delay(5);
+C51 COMPILER V8.08   语音                                                                  05/05/2019 23:12:24 PAGE 3   
+
+ 116   1          wcmd(0x0c);      //显示开，关光标
+ 117   1          delay(5);
+ 118   1          wcmd(0x01);      //清除LCD的显示内容
+ 119   1          delay(5);
+ 120   1      }
+ 121          
+ 122          //函数功能：设定显示位置                                          
+ 123          void pos(uchar X,uchar Y)
+ 124          {                          
+ 125   1         uchar  pos;
+ 126   1         if (X==0)
+ 127   1           {X=0x80;}
+ 128   1         else if (X==1)
+ 129   1           {X=0x90;}
+ 130   1         else if (X==2)
+ 131   1           {X=0x88;}
+ 132   1         else if (X==3)
+ 133   1           {X=0x98;}
+ 134   1         pos=X+Y ;  
+ 135   1         wcmd(pos);     //显示地址
+ 136   1      }
+ 137          //////////////////以上是12864驱动程序////////////////
+ 138          
+ 139          //////////////////以下是DS18B20驱动程序/////////////
+ 140          //延时函数
+ 141          void delay1(unsigned int i)
+ 142          {
+ 143   1              while(i--);
+ 144   1      }
+ 145          
+ 146          //初始化函数
+ 147          void Init_DS18B20(void)
+ 148          {
+ 149   1              unsigned char x=0;
+ 150   1              DQ = 1; //DQ复位
+ 151   1              delay1(64); //稍做延时
+ 152   1              DQ = 0; //单片机将DQ拉低
+ 153   1              delay1(640); //精确延时 大于 480us
+ 154   1              DQ = 1; //拉高总线
+ 155   1              delay1(112);
+ 156   1              x=DQ; //稍做延时后 如果x=0则初始化成功 x=1则初始化失败
+ 157   1              delay1(160);
+ 158   1      }
+ 159          
+ 160          //读一个字节
+ 161          ReadOneChar(void)
+ 162          {
+ 163   1              unsigned char i=0;
+ 164   1              unsigned char dat = 0;
+ 165   1              for (i=8;i>0;i--){
+ 166   2                      DQ = 0; // 给脉冲信号
+ 167   2                      dat>>=1;
+ 168   2                      DQ = 1; // 给脉冲信号
+ 169   2                      if(DQ)  dat|=0x80;
+ 170   2                      delay1(32);
+ 171   2                      }
+ 172   1              return(dat);
+ 173   1      }
+ 174          
+ 175          //写一个字节
+ 176          void WriteOneChar(unsigned char dat)
+ 177          {
+C51 COMPILER V8.08   语音                                                                  05/05/2019 23:12:24 PAGE 4   
+
+ 178   1              unsigned char i=0;
+ 179   1              for (i=8; i>0; i--){
+ 180   2                      DQ = 0;
+ 181   2                      DQ = dat&0x01;
+ 182   2                      delay1(40);
+ 183   2                      DQ = 1;
+ 184   2                      dat>>=1;
+ 185   2                      }
+ 186   1      }
+ 187          
+ 188          //读取温度
+ 189          ReadTemperature(void)
+ 190          {
+ 191   1              unsigned char a=0;
+ 192   1              unsigned char b=0;
+ 193   1              unsigned int  t=0;
+ 194   1      
+ 195   1              float tt=0;
+ 196   1              Init_DS18B20();
+ 197   1              WriteOneChar(0xCC); // 跳过读序号列号的操作
+ 198   1              WriteOneChar(0x44); // 启动温度转换
+ 199   1              Init_DS18B20();
+ 200   1              WriteOneChar(0xCC); //跳过读序号列号的操作
+ 201   1              WriteOneChar(0xBE); //读取温度寄存器等（共可读9个寄存器） 前两个就是温度
+ 202   1              a=ReadOneChar();
+ 203   1              b=ReadOneChar();
+ 204   1              t=b;
+ 205   1              t<<=8;
+ 206   1              t=t|a;
+ 207   1              tt=t*0.0625; //将温度的高位与低位合并
+ 208   1              t=tt*10+0.5; //对结果进行4舍5入
+ 209   1              return(t);
+ 210   1      }
+ 211          //////////////////以上是DS18B20驱动程序////////////////
+ 212          
+ 213          //////////////////以下是语音模块驱动程序///////////////
+ 214          //函数功能：串口初始化
+ 215          void UART_InitBaud(void)
+ 216          {
+ 217   1              SCON=0xD8 ;  //晶振为11.059MHZ时，设定串口波特率为9600bit/s，方式3  
+ 218   1              TMOD=0x20 ;
+ 219   1              PCON=0x00 ; 
+ 220   1              TH1=0xFD ; 
+ 221   1              TR1=1;  
+ 222   1      }
+ 223          
+ 224          //函数功能：串口发送数据
+ 225          void UART_Trans(uchar n)
+ 226          {
+ 227   1              SBUF = n;    
+ 228   1              while(TI==0);  //发送数据    
+ 229   1              TI=0;   
+ 230   1      }                               
+ 231          
+ 232          //函数功能：发声程序
+ 233          void Speech(uchar *buf, uchar len)
+ 234          {
+ 235   1              uchar i = 0;          //循环计数变量
+ 236   1              uchar xor = 0x00;     //校验码初始化
+ 237   1                              
+ 238   1              head[LEN_OFFSET] = len + 3;  //计算正文长度（1命令字 + 1命令参数 + 文字长度 + 1校验位）
+ 239   1      
+C51 COMPILER V8.08   语音                                                                  05/05/2019 23:12:24 PAGE 5   
+
+ 240   1      //函数功能：发送数据包头（0xFD + 2字节长度 + 1字节命令字 + 1字节命令参数)
+ 241   1              for(i = 0; i < HEADLEN; i++)
+ 242   1              {
+ 243   2                      xor ^= head[i];
+ 244   2                      UART_Trans(head[i]);
+ 245   2                      delay(2);
+ 246   2              }
+ 247   1      
+ 248   1      //函数功能：发送文字内容
+ 249   1              for(i=0; i<len;i++)
+ 250   1              {
+ 251   2                xor ^= buf[i];
+ 252   2                UART_Trans(buf[i]);
+ 253   2                delay(2);
+ 254   2              }
+ 255   1      
+ 256   1              UART_Trans(xor);        //发送校验位
+ 257   1      }
+ 258          //////////////////以下是语音模块驱动程序///////////////
+ 259          
+ 260          /*****************以下是主函数驱动程序***************/
+ 261          void main()
+ 262          {         
+ 263   1         char numbuf[10];
+ 264   1         uchar xor = 0;
+ 265   1         uint t;
+ 266   1         int i=0;
+ 267   1         float num ;
+ 268   1         Init_12864();              //初始化LCD 
+ 269   1         Init_DS18B20();            //初始化DS18B20
+ 270   1         t=ReadTemperature();
+ 271   1               delay(500);
+ 272   1         t=ReadTemperature();
+ 273   1           pos(0,0);             //设置显示位置为第一行的第1个字符
+ 274   1               
+ 275   1              memset(numbuf,0,sizeof numbuf);
+ 276   1              UART_InitBaud();  //初始化串口为 9600bps
+ 277   1          
+ 278   1              while(dis1[i] != '\0')
+ 279   1           {                         //显示摄氏温度
+ 280   2             wdat(dis1[i]);
+ 281   2             i++;
+ 282   2           }
+ 283   1              
+ 284   1              while(1)
+ 285   1               {
+ 286   2               t=ReadTemperature();
+ 287   2                 delay(500);
+ 288   2               t=ReadTemperature();    
+ 289   2                      pos(0,5);                                                         //第一行显示实时温度
+ 290   2                      wdat(mun_char_table[t/100]);
+ 291   2                      wdat(mun_char_table[t%100/10]);
+ 292   2                      wdat(0x2e);
+ 293   2                      wdat(mun_char_table[t%10]);
+ 294   2                      num= t/10.0;
+ 295   2                      delay(10);
+ 296   2                      if(BY!= 0xff)
+ 297   2                      {
+ 298   3                        delay(10);
+ 299   3                        if(BY!= 0xff)
+ 300   3                        {
+ 301   4                              if(S1==0)
+C51 COMPILER V8.08   语音                                                                  05/05/2019 23:12:24 PAGE 6   
+
+ 302   4                              {
+ 303   5                               delay(10);
+ 304   5                               if(S1==0)
+ 305   5                               {
+ 306   6                                 sprintf(text+15,"%6.2f",num);  //将浮点数 num 转为字符串，
+ 307   6                                                                    //并追加到数组text[]的第6字节后
+ 308   6                                                                                                //（前6字节为字符串“当前值”）
+ 309   6                                                                                               //参见库函数sprintf()的用法            
+ 310   6                                 Speech(text,20);   //调用发声函数，读出指定长度数据
+ 311   6                               }
+ 312   5                              }
+ 313   4                        }
+ 314   3                      }
+ 315   2                      delay(100);     //延时
+ 316   2              }
+ 317   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    925    ----
+   CONSTANT SIZE    =      6    ----
+   XDATA SIZE       =     92      29
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----       1
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

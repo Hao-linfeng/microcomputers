@@ -1,0 +1,164 @@
+C51 COMPILER V8.08   红蚠盻障                                                              05/01/2019 19:21:53 PAGE 1   
+
+
+C51 COMPILER V8.08, COMPILATION OF MODULE 红蚠盻障
+OBJECT MODULE PLACED IN 红外避障.OBJ
+COMPILER INVOKED BY: D:\keil C51\KEIL UV3 8.08 + 注册机\KEIL UV3 8.08\C51\BIN\C51.EXE 红外避障.c BROWSE DEBUG OBJECTEXTE
+                    -ND
+
+line level    source
+
+   1          #include<reg52.h>
+   2          #include<intrins.h>
+   3          #define uint unsigned int
+   4          #define uchar unsigned char
+   5          #define data P0  //数据口
+   6          
+   7          sbit psb=P3^7; //串/并口选择
+   8          sbit  rw=P3^6;   //读写控制
+   9          sbit  rs=P3^5;  //寄存器选择  0为指令  1为数据
+  10          sbit   E=P3^4;  //lcd使能信号（并口）
+  11          sbit dat=P1^0;
+  12          unsigned char mun_table[]={'Y','N'};
+  13          void wcmd(uchar cmd);
+  14          void delay(int ms);
+  15          /*******************************************************************/
+  16          /*                                                                 */
+  17          /*检查LCD忙状态                                                    */
+  18          /*lcd_busy为1时，忙，等待。lcd-busy为0时,闲，可写指令与数据。      */
+  19          /*                                                                 */
+  20          /*******************************************************************/
+  21          bit busy()
+  22           {                       
+  23   1          bit result;
+  24   1          P0=0X00;              //关掉数码管的信号。阻止数码管受到P0口信号的影响
+  25   1          rs=0;
+  26   1          rw=1;
+  27   1           E=1;
+  28   1          delay(1);
+  29   1          result=(bit)(P0&0x80);
+  30   1           E=0;
+  31   1          return(result); 
+  32   1       }
+  33          /*初始化*/
+  34          void init(void)
+  35          {
+  36   1              psb=1;          //并口方式
+  37   1          wcmd(0x34);          //扩展指令
+  38   1              delay(5);
+  39   1              wcmd(0x30);             //基本指令
+  40   1              delay(5);
+  41   1              wcmd(0x0c);              //显示光标开关
+  42   1              delay(5);
+  43   1              wcmd(0x01);              //清除lcd的显示内容
+  44   1              delay(5);
+  45   1      }
+  46          
+  47          /*传递指令*/
+  48          void wcmd(uchar cmd)
+  49          {
+  50   1              while(busy());
+  51   1              rs=0;
+  52   1              rw=0;
+  53   1               E=0;
+  54   1              data=cmd;
+C51 COMPILER V8.08   红蚠盻障                                                              05/01/2019 19:21:53 PAGE 2   
+
+  55   1              delay(1);
+  56   1               E=1;
+  57   1              delay(1);
+  58   1               E=0;
+  59   1      }
+  60          /*传递数据*/
+  61          void wdata(uchar dat)
+  62          {
+  63   1              while(busy());
+  64   1              rs=1;
+  65   1              rw=0;
+  66   1               E=0;
+  67   1              data=dat;
+  68   1              delay(1);
+  69   1               E=1;
+  70   1              delay(1);
+  71   1               E=0;
+  72   1      }
+  73          /*显示的位置*/
+  74          void pos(uchar x,uchar y)
+  75          {
+  76   1              uchar pos;
+  77   1              if(x==0)
+  78   1              {x=0x80;}
+  79   1              else if(x==1)
+  80   1              {x=0x90;}
+  81   1              else if(x==2)
+  82   1              {x=0x88;}
+  83   1              else if(x==3)
+  84   1              {x=0x98;}
+  85   1              pos=x+y;
+  86   1              wcmd(pos);
+  87   1      }                                                                               
+  88          /*******************************************************************/
+  89          /*                                                                 */
+  90          /*  延时函数                                                       */
+  91          /*                                                                 */
+  92          /*******************************************************************/
+  93          void delay(int ms)
+  94          {
+  95   1          while(ms--)
+  96   1              {
+  97   2            uchar i;
+  98   2                for(i=0;i<250;i++)  
+  99   2                 {
+ 100   3                  _nop_();                       
+ 101   3                      _nop_();
+ 102   3                      _nop_();
+ 103   3                      _nop_();
+ 104   3                 }
+ 105   2              }
+ 106   1      }
+ 107          //主函数程序
+ 108          void main(void)
+ 109          {
+ 110   1              uint i = 0;
+ 111   1              uchar name[] = {"是否遇到障碍："};
+ 112   1              delay(400); 
+ 113   1              init();
+ 114   1      
+ 115   1              pos(0,0);
+ 116   1              while(name[i] != '\0')
+C51 COMPILER V8.08   红蚠盻障                                                              05/01/2019 19:21:53 PAGE 3   
+
+ 117   1              {
+ 118   2                wdata(name[i]);
+ 119   2                i++;
+ 120   2              }
+ 121   1         delay(500);
+ 122   1         
+ 123   1              while(1)
+ 124   1              {       
+ 125   2                  pos(0,7);
+ 126   2                      if(dat==1)
+ 127   2                      {
+ 128   3                        wdata(mun_table[1]);    
+ 129   3                      }
+ 130   2                      else
+ 131   2                      {
+ 132   3                         wdata(mun_table[0]);   //有人经过输出低电平，导通检测
+ 133   3                         delay(1000);
+ 134   3                      }       
+ 135   2              }
+ 136   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    290    ----
+   CONSTANT SIZE    =     15    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2      20
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----       1
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

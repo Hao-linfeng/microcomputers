@@ -1,0 +1,285 @@
+BL51 BANKED LINKER/LOCATER V6.05                                                        04/28/2019  20:17:42  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.05, INVOKED BY:
+D:\KEIL C51\KEIL UV3 8.08 + 注册机\KEIL UV3 8.08\C51\BIN\BL51.EXE STARTUP.obj, 人体红外.obj TO 人体红外 RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  STARTUP.obj (?C_STARTUP)
+  人体红外.obj (人体红蚠)
+
+
+LINK MAP OF MODULE:  人体红外 (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+                    0008H     0018H                  *** GAP ***
+            BIT     0020H.0   0000H.1   UNIT         _BIT_GROUP_
+                    0020H.1   0000H.7                *** GAP ***
+            IDATA   0021H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     0033H     UNIT         ?PR?MAIN?人体红蚠
+            CODE    0833H     0032H     UNIT         ?PR?INIT?人体红蚠
+            CODE    0865H     002DH     UNIT         ?PR?_DELAY_MS?人体红蚠
+            CODE    0892H     0020H     UNIT         ?PR?_POS?人体红蚠
+            CODE    08B2H     0019H     UNIT         ?PR?BUSY?人体红蚠
+            CODE    08CBH     0015H     UNIT         ?PR?_WCMD?人体红蚠
+            CODE    08E0H     0013H     UNIT         ?PR?_WDAT?人体红蚠
+            CODE    08F3H     000EH     UNIT         ?CO?人体红蚠
+            CODE    0901H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   人体红外 (?C_STARTUP)
+
+
+SEGMENT                           BIT_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?人体红蚠
+
+?PR?MAIN?人体红蚠              -----    -----
+  +--> ?PR?INIT?人体红蚠
+  +--> ?PR?_DELAY_MS?人体红蚠
+  +--> ?PR?_POS?人体红蚠
+  +--> ?CO?人体红蚠
+  +--> ?PR?_WDAT?人体红蚠
+
+?PR?INIT?人体红蚠              -----    -----
+  +--> ?PR?_WCMD?人体红蚠
+BL51 BANKED LINKER/LOCATER V6.05                                                      04/28/2019  20:17:42  PAGE 2
+
+
+  +--> ?PR?_DELAY_MS?人体红蚠
+
+?PR?_WCMD?人体红蚠             -----    -----
+  +--> ?PR?BUSY?人体红蚠
+  +--> ?PR?_DELAY_MS?人体红蚠
+
+?PR?BUSY?人体红蚠              0020H.0  0000H.1
+  +--> ?PR?_DELAY_MS?人体红蚠
+
+?PR?_POS?人体红蚠              -----    -----
+  +--> ?PR?_WCMD?人体红蚠
+
+?PR?_WDAT?人体红蚠             -----    -----
+  +--> ?PR?BUSY?人体红蚠
+  +--> ?PR?_DELAY_MS?人体红蚠
+
+
+
+SYMBOL TABLE OF MODULE:  人体红外 (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C_STARTUP
+  C:0901H         SEGMENT       ?C_C51STARTUP
+  I:0021H         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:0904H         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:0901H         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:0901H         LINE#         133
+  C:0903H         LINE#         134
+  C:0904H         LINE#         135
+  C:0905H         LINE#         136
+  C:0907H         LINE#         185
+  C:090AH         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+BL51 BANKED LINKER/LOCATER V6.05                                                      04/28/2019  20:17:42  PAGE 3
+
+
+  -------         MODULE        人体红蚠
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  B:0090H.0       PUBLIC        DATA
+  B:00B0H.5       PUBLIC        RS
+  C:0800H         PUBLIC        main
+  B:00B0H.6       PUBLIC        RW
+  C:08CBH         PUBLIC        _wcmd
+  C:08E0H         PUBLIC        _wdat
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  C:0833H         PUBLIC        init
+  B:00B0H.4       PUBLIC        E
+  C:08B2H         PUBLIC        busy
+  C:0892H         PUBLIC        _pos
+  C:0874H         PUBLIC        _delay_ms
+  B:00B0H.7       PUBLIC        PSB
+  D:00C8H         PUBLIC        T2CON
+  C:08F3H         PUBLIC        dis1
+  C:08FAH         PUBLIC        dis2
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          L?0035
+  -------         ENDPROC       L?0035
+  -------         PROC          _DELAY_MS
+  D:0006H         SYMBOL        z
+  -------         DO            
+  D:0006H         SYMBOL        x
+  D:0004H         SYMBOL        y
+  -------         ENDDO         
+  C:0874H         LINE#         14
+  C:0874H         LINE#         15
+  C:0874H         LINE#         17
+  C:087DH         LINE#         18
+  C:0891H         LINE#         19
+  -------         ENDPROC       _DELAY_MS
+  -------         PROC          BUSY
+  -------         DO            
+  B:0020H.0       SYMBOL        result
+  -------         ENDDO         
+  C:08B2H         LINE#         29
+  C:08B2H         LINE#         30
+  C:08B2H         LINE#         32
+  C:08B5H         LINE#         33
+  C:08B7H         LINE#         34
+  C:08B9H         LINE#         35
+  C:08BBH         LINE#         36
+  C:08C1H         LINE#         37
+  C:08C6H         LINE#         38
+  C:08C8H         LINE#         39
+  C:08CAH         LINE#         40
+  -------         ENDPROC       BUSY
+  -------         PROC          _WCMD
+  D:0003H         SYMBOL        cmd
+BL51 BANKED LINKER/LOCATER V6.05                                                      04/28/2019  20:17:42  PAGE 4
+
+
+  C:08CBH         LINE#         47
+  C:08CDH         LINE#         48
+  C:08CDH         LINE#         49
+  C:08D2H         LINE#         50
+  C:08D4H         LINE#         51
+  C:08D6H         LINE#         52
+  C:08D8H         LINE#         53
+  C:08D9H         LINE#         54
+  C:08DAH         LINE#         55
+  C:08DAH         LINE#         56
+  C:08DAH         LINE#         57
+  C:08DAH         LINE#         58
+  C:08DDH         LINE#         59
+  C:08DFH         LINE#         60
+  -------         ENDPROC       _WCMD
+  -------         PROC          _WDAT
+  D:0003H         SYMBOL        dat
+  C:08E0H         LINE#         67
+  C:08E2H         LINE#         68
+  C:08E2H         LINE#         69
+  C:08E7H         LINE#         70
+  C:08E9H         LINE#         71
+  C:08EBH         LINE#         72
+  C:08EDH         LINE#         73
+  C:08EDH         LINE#         74
+  C:08EDH         LINE#         75
+  C:08EDH         LINE#         76
+  C:08F0H         LINE#         77
+  C:08F2H         LINE#         78
+  -------         ENDPROC       _WDAT
+  -------         PROC          INIT
+  C:0833H         LINE#         84
+  C:0833H         LINE#         85
+  C:0833H         LINE#         87
+  C:0835H         LINE#         88
+  C:083AH         LINE#         89
+  C:0841H         LINE#         90
+  C:0846H         LINE#         91
+  C:084DH         LINE#         92
+  C:0852H         LINE#         93
+  C:0859H         LINE#         94
+  C:085EH         LINE#         95
+  -------         ENDPROC       INIT
+  -------         PROC          _POS
+  D:0007H         SYMBOL        X
+  D:0005H         SYMBOL        Y
+  -------         DO            
+  D:0007H         SYMBOL        pos
+  -------         ENDDO         
+  C:0892H         LINE#         102
+  C:0892H         LINE#         103
+  C:0892H         LINE#         105
+  C:0895H         LINE#         106
+  C:0899H         LINE#         107
+  C:089CH         LINE#         108
+  C:08A0H         LINE#         109
+  C:08A3H         LINE#         110
+BL51 BANKED LINKER/LOCATER V6.05                                                      04/28/2019  20:17:42  PAGE 5
+
+
+  C:08A7H         LINE#         111
+  C:08AAH         LINE#         112
+  C:08ACH         LINE#         113
+  C:08AFH         LINE#         114
+  -------         ENDPROC       _POS
+  -------         PROC          MAIN
+  -------         DO            
+  D:0002H         SYMBOL        i
+  -------         ENDDO         
+  C:0800H         LINE#         118
+  C:0800H         LINE#         119
+  C:0800H         LINE#         120
+  C:0802H         LINE#         121
+  C:0805H         LINE#         122
+  C:080CH         LINE#         132
+  C:080CH         LINE#         133
+  C:080CH         LINE#         134
+  C:0812H         LINE#         135
+  C:0814H         LINE#         136
+  C:0817H         LINE#         137
+  C:0817H         LINE#         138
+  C:081FH         LINE#         139
+  C:081FH         LINE#         140
+  C:0822H         LINE#         141
+  C:0823H         LINE#         142
+  C:0825H         LINE#         143
+  C:0825H         LINE#         145
+  C:0825H         LINE#         146
+  C:082DH         LINE#         147
+  C:082DH         LINE#         148
+  C:0830H         LINE#         149
+  C:0831H         LINE#         150
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        人体红蚠
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0110H BYTE (13%) *
+******************************************************************************
+
+Program Size: data=9.1 xdata=0 code=272
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
